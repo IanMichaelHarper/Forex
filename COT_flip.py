@@ -5,6 +5,14 @@ This script plots the Commitment of Traders Reports flip for all assets/tickers/
 import pandas as pd
 import matplotlib.pyplot as plt
 
+def get_cot_columns():
+    df = pd.read_excel("~/Downloads/dea_fut_xls_2019/annual.xls")
+    df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY',	'NonComm_Positions_Long_All',
+             'NonComm_Positions_Short_All',	'Change_in_NonComm_Long_All',	'Change_in_NonComm_Short_All',
+             'Pct_of_OI_NonComm_Long_All','Pct_of_OI_NonComm_Short_All']]
+    df.to_excel("~/Downloads/AUD_COT_2019.xls")
+    exit(1)
+
 df = pd.read_excel("annual.xls")
 df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY',	'NonComm_Positions_Long_All',
          'NonComm_Positions_Short_All',	'Change_in_NonComm_Long_All',	'Change_in_NonComm_Short_All',
