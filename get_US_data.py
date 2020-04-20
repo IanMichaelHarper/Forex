@@ -5,7 +5,7 @@ codes = ["ISM/MAN_PMI",
 #        "UMICH/SOC1", 
         # no free BP, but quandl has this data for 200+ countries. Think I need an account
 #        "FED/M2_M",  # quandl has data here for other countries
-#        "FED/RIFSPFF_N_M",  # monthly fed funds, quandl has daily rates too (more up to date)        
+#        "FED/RIFSPFF_N_M",  # monthly fed funds, quandl has daily rates too (more up to date). Also FRED code of DFF 
 #        "FRED/CPIAUCSL", 
 #        "FRED/CPIAUCSL",
          "FRED/WPSFD49207",  # PPI finished goods
