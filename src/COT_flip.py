@@ -19,7 +19,7 @@ df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY',	'NonComm_Posi
          'Pct_of_OI_NonComm_Long_All','Pct_of_OI_NonComm_Short_All']]
 df['Flip'] = df['Pct_of_OI_NonComm_Long_All'] - df['Pct_of_OI_NonComm_Short_All']
 tickers = df['Market_and_Exchange_Names'].unique()
-chart_dir = './cot_charts'
+chart_dir = 'data/cot_charts'
 for ticker in tickers:
     try:
         sub_df = df[df['Market_and_Exchange_Names'] == ticker]

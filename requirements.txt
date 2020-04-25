@@ -1,4 +1,0 @@
-quandl
-pandas
-xlrd
-matplotlib
