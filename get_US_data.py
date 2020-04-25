@@ -8,8 +8,8 @@ codes = ["ISM/MAN_PMI",
 #        "FED/RIFSPFF_N_M",  # monthly fed funds, quandl has daily rates too (more up to date). Also FRED code of DFF 
 #        "FRED/CPIAUCSL", 
 #        "FRED/CPIAUCSL",
-         "FRED/WPSFD49207",  # PPI finished goods
-         "FRED/WPSFD4131",  # PPI finished goods less foods and energy
+##         "FRED/WPSFD49207",  # PPI finished goods
+ #        "FRED/WPSFD4131",  # PPI finished goods less foods and energy
 #        "FRED/PAYEMS",  # Non Farm Payrolls NFP
 #        "FRED/FYGDP", # GDP
 #        "FRED/GFDEBTN", #  Total Public Debt
