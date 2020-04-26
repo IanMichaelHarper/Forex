@@ -1,7 +1,6 @@
 *.csv
 *.xls
 *.xlsx
-*.png
 venv
 .idea
 __pycache__
