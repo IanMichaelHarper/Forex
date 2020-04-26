@@ -1,13 +1,7 @@
-from helpers.extract import GSheets
+from helpers.extract import get_cot_flip_df
+from helpers.plot import plot_cot_flip
 
 if __name__ == '__main__':
-    sheet = GSheets()
-    values = sheet.get_values()
+    df = get_cot_flip_df()
+    plot_cot_flip(df)
 
-    if not values:
-        print('No data found.')
-    else:
-        print('Name, Major:')
-        for row in values:
-            # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s, %s' % (row[0], row[4]))

@@ -4,6 +4,8 @@ import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+import quandl as q
+import pandas as pd
 
 
 class GSheets(object):
@@ -52,3 +54,50 @@ class GSheets(object):
         values = result.get('values', [])
 
         return values
+
+
+def get_cot_columns():
+    df = pd.read_excel("~/Downloads/dea_fut_xls_2019/annual.xls")
+    df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY', 'NonComm_Positions_Long_All',
+             'NonComm_Positions_Short_All', 'Change_in_NonComm_Long_All', 'Change_in_NonComm_Short_All',
+             'Pct_of_OI_NonComm_Long_All', 'Pct_of_OI_NonComm_Short_All']]
+    df.to_excel("~/Downloads/AUD_COT_2019.xls")
+
+
+def get_cot_flip_df():
+    df = pd.read_excel("~/Downloads/annual.xls")
+    df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY', 'NonComm_Positions_Long_All',
+             'NonComm_Positions_Short_All', 'Change_in_NonComm_Long_All', 'Change_in_NonComm_Short_All',
+             'Pct_of_OI_NonComm_Long_All', 'Pct_of_OI_NonComm_Short_All']]
+    df['Flip'] = df['Pct_of_OI_NonComm_Long_All'] - df['Pct_of_OI_NonComm_Short_All']
+
+    return df
+
+
+def get_and_save_quandl_data():
+    codes = ["ISM/MAN_PMI",
+            "ISM/NONMAN_NMI"
+    #        "UMICH/SOC1",
+            # no free BP, but quandl has this data for 200+ countries. Think I need an account
+    #        "FED/M2_M",  # quandl has data here for other countries
+    #        "FED/RIFSPFF_N_M",  # monthly fed funds, quandl has daily rates too (more up to date). Also FRED code of DFF
+    #        "FRED/CPIAUCSL",
+    #        "FRED/CPIAUCSL",
+    #         "FRED/WPSFD49207",  # PPI finished goods
+    #        "FRED/WPSFD4131",  # PPI finished goods less foods and energy
+    #        "FRED/PAYEMS",  # Non Farm Payrolls NFP
+    #        "FRED/FYGDP", # GDP
+    #        "FRED/GFDEBTN", #  Total Public Debt
+    #        "FRED/GFDEGDQ188S", # Debt to GDP
+    #        "FRED/FYFSGDA188S", # Surplus deficit as a % of GDP
+    #        "FRED/FYOINT", #  Outlays: Interest (interest bill)
+    #        "FRED/FYONET", #  Outlays: Net
+    #        "FRED/FYFR", #  Receipts
+    #        "FRED/WGS10YR", # 10-year Treasury Bond interest rate
+    #        "FRED/WALCL", # Fed Balance Sheet
+    #        "FRED/A191RL1Q225SBEA" # Real GDP % Growth
+    ]
+
+    for code in codes:
+        data = q.get(code)
+        data.to_csv(code.split('/')[1] + ".csv", index=False)
