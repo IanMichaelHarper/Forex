@@ -17,7 +17,7 @@ def plot_cot_flip(df):
             plt.grid()
             ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d'))
             fig.autofmt_xdate()
-            chart_dir = '../data/COT/charts/not_flipped/'
+            chart_dir = '../data/COT/charts/2020/not_flipped/'
             if any(sub_df['Flip'] > 0) and any(sub_df['Flip'] < 0):
                 print(f'Traders have flipped for {ticker}')
                 chart_dir = chart_dir.replace('not_flipped', 'flipped')
