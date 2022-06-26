@@ -56,6 +56,7 @@ class GSheets(object):
         return values
 
 
+# TODO: re-write the bash code here into a bash script, then maybe make a Makefile to execute everything?
 def get_cot_columns():
     os.system("wget -P ../../data/COT/raw_report/ https://www.cftc.gov/files/dea/history/dea_fut_xls_2020.zip")
     os.system("cd ../data/COT/raw_report/ && unzip dea_com_xls_2020.zip")
@@ -70,7 +71,7 @@ def get_cot_flip_df(year):
     # os.system(f"rm -rf ../data/COT/raw_report/*")  # TODO: implement safer solution
     os.system(f"wget -P ../data/COT/raw_report/ https://www.cftc.gov/files/dea/history/dea_fut_xls_{year}.zip")
     os.system(f"unzip ../data/COT/raw_report/dea_fut_xls_{year}.zip -d ../data/COT/raw_report/")
-    df = pd.read_excel("/home/harperi/Dev/PycharmProjects/Forex/data/COT/raw_report/annual.xls")
+    df = pd.read_excel("../data/COT/raw_report/annual.xls")
     df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY', 'NonComm_Positions_Long_All',
              'NonComm_Positions_Short_All', 'Change_in_NonComm_Long_All', 'Change_in_NonComm_Short_All',
              'Pct_of_OI_NonComm_Long_All', 'Pct_of_OI_NonComm_Short_All']]
