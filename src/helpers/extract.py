@@ -57,14 +57,14 @@ class GSheets(object):
 
 
 # TODO: re-write the bash code here into a bash script, then maybe make a Makefile to execute everything?
-def get_cot_columns():
-    os.system("wget -P ../../data/COT/raw_report/ https://www.cftc.gov/files/dea/history/dea_fut_xls_2020.zip")
-    os.system("cd ../data/COT/raw_report/ && unzip dea_com_xls_2020.zip")
-    df = pd.read_excel("/home/harperi/Dev/PycharmProjects/Forex/data/COT/raw_report/dea_fut_xls_2020/annual.xls")
+def get_cot_columns(year):
+    os.system(f"wget -P ../../data/COT/raw_report/ https://www.cftc.gov/files/dea/history/dea_fut_xls_{year}.zip")
+    os.system(f"cd ../data/COT/raw_report/ && unzip dea_com_xls_{year}.zip")
+    df = pd.read_excel(f"/home/harperi/Dev/PycharmProjects/Forex/data/COT/raw_report/dea_fut_xls_{year}/annual.xls")
     df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY', 'NonComm_Positions_Long_All',
              'NonComm_Positions_Short_All', 'Change_in_NonComm_Long_All', 'Change_in_NonComm_Short_All',
              'Pct_of_OI_NonComm_Long_All', 'Pct_of_OI_NonComm_Short_All']]
-    df.to_excel("~/Downloads/AUD_COT_2019.xls")
+    df.to_excel(f"~/Downloads/AUD_COT_{year}.xls")
 
 
 def get_cot_flip_df(year):
