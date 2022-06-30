@@ -1,6 +1,6 @@
 from __future__ import print_function
 import pickle
-import os.path
+import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -56,16 +56,22 @@ class GSheets(object):
         return values
 
 
+# TODO: re-write the bash code here into a bash script, then maybe make a Makefile to execute everything?
 def get_cot_columns():
-    df = pd.read_excel("~/Downloads/dea_fut_xls_2019/annual.xls")
+    os.system("wget -P ../../data/COT/raw_report/ https://www.cftc.gov/files/dea/history/dea_fut_xls_2020.zip")
+    os.system("cd ../data/COT/raw_report/ && unzip dea_com_xls_2020.zip")
+    df = pd.read_excel("/home/harperi/Dev/PycharmProjects/Forex/data/COT/raw_report/dea_fut_xls_2020/annual.xls")
     df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY', 'NonComm_Positions_Long_All',
              'NonComm_Positions_Short_All', 'Change_in_NonComm_Long_All', 'Change_in_NonComm_Short_All',
              'Pct_of_OI_NonComm_Long_All', 'Pct_of_OI_NonComm_Short_All']]
     df.to_excel("~/Downloads/AUD_COT_2019.xls")
 
 
-def get_cot_flip_df():
-    df = pd.read_excel("~/Downloads/annual.xls")
+def get_cot_flip_df(year):
+    # os.system(f"rm -rf ../data/COT/raw_report/*")  # TODO: implement safer solution
+    os.system(f"wget -P ../data/COT/raw_report/ https://www.cftc.gov/files/dea/history/dea_fut_xls_{year}.zip")
+    os.system(f"unzip ../data/COT/raw_report/dea_fut_xls_{year}.zip -d ../data/COT/raw_report/")
+    df = pd.read_excel("../data/COT/raw_report/annual.xls")
     df = df[['Market_and_Exchange_Names', 'Report_Date_as_MM_DD_YYYY', 'NonComm_Positions_Long_All',
              'NonComm_Positions_Short_All', 'Change_in_NonComm_Long_All', 'Change_in_NonComm_Short_All',
              'Pct_of_OI_NonComm_Long_All', 'Pct_of_OI_NonComm_Short_All']]
