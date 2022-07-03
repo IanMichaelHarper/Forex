@@ -68,7 +68,7 @@ def get_cot_columns(year):
 
 
 def get_cot_flip_df(year):
-    # os.system(f"rm -rf ../data/COT/raw_report/*")  # TODO: implement safer solution
+    os.system(f"rm -rf ../data/COT/raw_report/*")  # TODO: implement safer solution
     os.system(f"wget -P ../data/COT/raw_report/ https://www.cftc.gov/files/dea/history/dea_fut_xls_{year}.zip")
     os.system(f"unzip ../data/COT/raw_report/dea_fut_xls_{year}.zip -d ../data/COT/raw_report/")
     df = pd.read_excel("../data/COT/raw_report/annual.xls")
